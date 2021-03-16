@@ -46,6 +46,11 @@ class CompaniesAPIController extends Controller
       'website' 	=> $request->post('website')
 
     ]);
+    
+
+    $fileName = time().'.'.$request->logo_image_directory->extension();  
+
+    $request->logo_image_directory->move(storage_path('uploads/public'), $fileName);
 
     $companies->save();
 
