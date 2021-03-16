@@ -44,8 +44,7 @@ class EmployeesAPIController extends Controller
 		$request->validate([
 			'first_name'=>'required',
 			'last_name'=>'required',
-			'email'=>'required'
-		]);
+ 		]);
 
 		$hashed_random_password = Str::random(8);
 
@@ -80,14 +79,22 @@ class EmployeesAPIController extends Controller
       	
       	});
 
-        return response()->json($employees, 201);
+        return response()->json(['employees' => $employees, 'message' => 'Employee Saved Successfully!'], 200);
     }
 
    public function update(Request $request, Employees $employees){
-	    
-	    $employees->update($request->all());
+        
+      $request->validate([
+        'first_name'=>'required',
+        'last_name'=>'required',
+       ]); 
 
-		return response()->json($employees, 200);
+
+      $employees->where(['id'=>$request->id])->update($request->all());
+
+      $employees->update($request->all());
+
+		return response()->json([$employees, 'message' => 'Employee Updated Successfully!'], 200);
 	}
 
 	public function delete(Request $request){

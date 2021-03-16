@@ -37,8 +37,7 @@ class CompaniesAPIController extends Controller
 
 		$request->validate([
 			'name'=>'required',
-      'email'=>'required'    
-    ]);
+     ]);
 
     $companies 			= new Companies([
       
@@ -50,28 +49,20 @@ class CompaniesAPIController extends Controller
 
     $companies->save();
 
-    return response()->json($companies, 201);
+    return response()->json(['companies' => $companies, 'message' => 'Company Saved Successfully!'], 200);
     
   }
 
-  public function update(Request $request, Companies $companies){
+  public function update(Request $request, $id){
   	    
       $request->validate([
         'name'=>'required',
-        'email'=>'required'    
-      ]);
-      
-      $companies = Companies::find($id);
-      
-      $companies->name    =  $request->get('name');
-      $companies->email   =  $request->get('email');
-      $companies->website =  $request->get('website');
+       ]);
+       
 
- 
+    $companies->where(['id'=>$request->id])->update($request->all());
 
-	    //$companies->where(['id'=>$request->id])->update($request->all());
-
-		  return response()->json($companies, 200);
+    return response()->json(['companies' => $companies, 'message' => 'Company Saved Successfully!'], 200);
 	}
 
 	public function delete(Request $request){

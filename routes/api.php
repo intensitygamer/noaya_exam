@@ -23,13 +23,13 @@ use App\Http\Controllers\API\CompaniesAPIController;
 Route::get('employees', [EmployeesAPIController::class, 'index']);
 Route::get('employees/{id}', [EmployeesAPIController::class, 'show']);
 Route::post('employees', [EmployeesAPIController::class, 'store']);
-Route::put('employees/{id}', [EmployeesAPIController::class, 'update']);
+Route::post('employees/{id}', [EmployeesAPIController::class, 'update']);
 Route::delete('employees/{id}', [EmployeesAPIController::class, 'delete']);
 
 
 Route::get('companies', [CompaniesAPIController::class, 'index']);
 Route::get('companies/{id}', [CompaniesAPIController::class, 'show']);
 Route::post('companies', [CompaniesAPIController::class, 'store']);
-Route::put('companies/{id}', [CompaniesAPIController::class, 'update']);
+Route::post('companies/{id}', [CompaniesAPIController::class, 'update']);
 Route::delete('companies/{id}', [CompaniesAPIController::class, 'delete']);
 
